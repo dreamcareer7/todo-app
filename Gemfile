@@ -28,7 +28,8 @@ gem 'jbuilder', '~> 2.10'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'devise'
+gem 'audited', '~> 4.9'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'haml-rails'
@@ -42,6 +43,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :development do

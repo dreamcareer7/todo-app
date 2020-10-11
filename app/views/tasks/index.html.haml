@@ -1,4 +1,10 @@
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+
 %h1 Tasks
+%br=link_to 'Add a task', new_task_path
+%br
+= select_tag :filter, options_for_select({"Completed" => true, "Incompleted" => false}), :prompt => "viewed by" 
+
 
 %table
   %thead
@@ -9,15 +15,14 @@
       %th
       %th
 
-  %tbody
-    - @tasks.each do |task|
-      %tr
-        %td=task.name
-        %td=task.completed
-        %td=link_to 'Show', task
-        %td=link_to 'Edit', edit_task_path(task)
-        %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  %tbody{id: 'tasks'}
+    = render :partial => 'list_partial'
 
-%br
-
-=link_to 'Add a task', new_task_path
+:javascript
+  $('#filter').change(function(){
+    $.ajax({
+      url: '/tasks',
+      type: 'GET',
+      data: {completed: $('#filter option:selected').val()}
+    })
+  });

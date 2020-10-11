@@ -11,6 +11,6 @@
     =f.text_field :name
   .field
     =f.label :completed
-    =f.check_box :completed
+    =f.check_box :completed, disabled: f.object.new_record? ? true : false
   .actions
     =f.submit 'Save'

@@ -1,0 +1,25 @@
+- @tasks.each do |task|
+  %tr{id: "tasks-row"}
+    %td=task.name
+    %td=task.completed
+    %td=link_to 'Show', task
+    %td=link_to 'Edit', edit_task_path(task)
+    %td=link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+- if params['completed'] == 'true' && @audits.present?
+  %div
+    %p Completed Task audit history
+    %tr
+      %th Task name
+      %th Comment
+      %th Performed by
+      %th action
+      %th Performed AT
+    - @audits.each do |a|
+      %tr
+        %td=a.auditable.name
+        %td=a.comment.nil? ? 'N/A' : a.comment
+        %td=a.user.email
+        %td=a.action
+        %td=a.created_at.strftime("%D %H:%M %p")
